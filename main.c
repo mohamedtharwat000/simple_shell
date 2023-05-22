@@ -1,28 +1,25 @@
 #include "main.h"
 
 /**
- * main - simple shell implementation.
- * @argc: number of argument passed to the program.
- * @argv: array of strings represent the argument passed to the program.
- * @env: enviroment variable passed to the program.
+ * main - Simple shell implementation.
+ * @argc: Number of arguments passed to the program.
+ * @argv: Array of strings representing arguments passed to the program.
+ * @envp: Array of strings representing the environment variables.
+ *
+ * Return: 0 on success or -1 on failure.
  */
-
-int main(int __attribute__((unused)) argc, char __attribute__((unused)) **argv, char __attribute__((unused)) **env)
+int main(int argc, char **argv, char **envp)
 {
-	int status;
+	int status = 0;
 
-	if (argc == 1)
+	if (argc < 2)
 	{
-		status = interactive_shell();
+		status = interactive_shell(argv, envp);
 	}
 	else
 	{
-		/* status = non_interactive_shell(); */
+		status = non_interactive_shell(argv, envp);
 	}
 
-	if (status == -1)
-	{
-		return (1);
-	}
-	return 0;
+	return (status);
 }

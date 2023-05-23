@@ -16,10 +16,17 @@ int main(int argc, char **argv, char **envp)
 	{
 		status = interactive_shell(argv, envp);
 	}
-	else
+	else if (argc != 2)
 	{
-		status = non_interactive_shell(argv, envp);
+		printf("Usage: %s filename\n", argv[0]);
+		return (EXIT_FAILURE);
 	}
-
-	return (status);
+	char *filename = argv[1];
+	ssize_t ret = non_interactive_shell(filename, argv, envp);
+	if (ret == -1)
+	{
+		fprintf(stderr, "Error: Failed to run non-interactive shell.\n");
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }

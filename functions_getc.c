@@ -10,5 +10,5 @@
  */
 ssize_t _getc(char *c, size_t fd)
 {
-	return (read(fd, c, sizeof(c)));
+	return (read(fd, c, sizeof(*c)));
 }

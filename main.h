@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <errno.h>
 
 #define BUFFSIZE 1024
 
@@ -14,7 +15,7 @@ ssize_t interactive_shell(char **argv, char **envp);
 ssize_t non_interactive_shell(char **argv, char **envp);
 
 /* Execute command function */
-int exec_buff(char *command, char **buff_argv, char **argv, char **envp);
+int exec_buff(char *command, char **comand_argv, size_t *counter, char **argv, char **envp);
 
 /* Path functions */
 char *get_path(char **envp);

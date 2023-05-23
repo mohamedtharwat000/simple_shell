@@ -67,30 +67,37 @@ char **split(char *str, char *delim)
  */
 size_t count_tokens(char *str, char *delim)
 {
-	size_t position = 0, count = 0, dlen = _strlen(delim);
+	size_t i = 0, count = 0, dlen = _strlen(delim);
 
-	while (str[position])
+	if (_strlen(str) == 0)
 	{
-		if (_strncmp(&str[position], delim, dlen) == 0)
+		return (count);
+	}
+
+	while (str[i])
+	{
+		if (_strncmp(&str[i], delim, dlen) == 0)
 		{
-			if (position != 0)
+			if (i != 0)
 			{
 				count++;
 			}
-			while (_strncmp(&str[position], delim, dlen) == 0)
+			while (_strncmp(&str[i], delim, dlen) == 0)
 			{
-				position += dlen;
+				i += dlen;
+			}
+			if (_strncmp(&str[i - dlen], delim, dlen) == 0)
+			{
+				i--;
 			}
 		}
-
-		position++;
-		if (str[position] == '\0')
+		i++;
+	}
+	if (str[i] == '\0')
+	{
+		if (_strncmp(&str[i - dlen], delim, dlen) != 0)
 		{
-			if (_strncmp(&str[position - dlen], delim, dlen) != 0)
-			{
-				count++;
-			}
-			break;
+			count++;
 		}
 	}
 
@@ -115,41 +122,18 @@ size_t count_tokens(char *str, char *delim)
  */
 char **split_tok(char *str, char *delim, char **words)
 {
-	size_t position = 0, start = 0, end = 0, length = 0, next_word = 0;
+	size_t i = 0, start = 0, end = 0, length = 0, next_word = 0;
 	size_t dlen = _strlen(delim);
 	char *token = NULL;
 
-	while (str[position])
-	{
-		if (_strncmp(&str[position], delim, dlen) == 0)
-		{
-			if (position != 0)
-			{
-				end = position;
-				length = end - start;
-				token = malloc(length + 1);
-				if (!token)
-				{
-					return (NULL);
-				}
-				_strncpy(token, &str[start], length);
-				token[length] = '\0';
-				words[next_word++] = token;
-				start = end + dlen;
-			}
-			while (_strncmp(&str[position], delim, dlen) == 0)
-			{
-				position += dlen;
-			}
-			start = position;
-		}
 
-		position++;
-		if (str[position] == '\0')
+	while (str[i])
+	{
+		if (_strncmp(&str[i], delim, dlen) == 0)
 		{
-			if (_strncmp(&str[position - dlen], delim, dlen) != 0)
+			if (i != 0)
 			{
-				end = position;
+				end = i;
 				length = end - start;
 				token = malloc(length + 1);
 				if (!token)
@@ -159,9 +143,34 @@ char **split_tok(char *str, char *delim, char **words)
 				_strncpy(token, &str[start], length);
 				token[length] = '\0';
 				words[next_word++] = token;
-				start = end + dlen;
+				start = end;
 			}
-			break;
+			while (_strncmp(&str[i], delim, dlen) == 0)
+			{
+				i += dlen;
+			}
+			start = i;
+			if (_strncmp(&str[i - dlen], delim, dlen) == 0)
+			{
+				i--;
+			}
+		}
+		i++;
+	}
+	if (str[i] == '\0')
+	{
+		if (_strncmp(&str[i - dlen], delim, dlen) != 0)
+		{
+			end = i;
+			length = end - start;
+			token = malloc(length + 1);
+			if (!token)
+			{
+				return (NULL);
+			}
+			_strncpy(token, &str[start], length);
+			token[length] = '\0';
+			words[next_word++] = token;
 		}
 	}
 

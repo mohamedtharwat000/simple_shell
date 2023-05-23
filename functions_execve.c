@@ -1,5 +1,19 @@
 #include "main.h"
 
+char *ntos(size_t num) {
+  char *str = malloc(sizeof(char) * 10);
+  int i = 0;
+
+  while (num > 0) {
+    str[i++] = (num % 10) + '0';
+    num /= 10;
+  }
+
+  str[i] = '\0';
+
+  return str;
+}
+
 /**
  * exec_buff - Execute a command in the shell.
  * @buff: Command to be executed.
@@ -8,16 +22,19 @@
  *
  * Return: 0 on success, -1 on failure.
  */
-int exec_buff(char *command, char **buff_argv, char **argv, char **envp)
+int exec_buff(char *command, char **command_argv, size_t *counter, char **argv, char **envp)
 {
 	pid_t pid;
 	int status;
-	char *path = get_path(envp);
-	char *correct_path = search_path(command, path);
+	char *path_var = get_path(envp);
+	char *path = search_path(command, path_var);
 
-	if (correct_path == NULL)
+	if (path == NULL)
 	{
-		perror(argv[0]);
+		_puts(argv[0], STDOUT_FILENO);
+		_puts(": ", STDOUT_FILENO);
+		_puts(ntos(*counter), STDOUT_FILENO);
+		perror("");
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -32,7 +49,7 @@ int exec_buff(char *command, char **buff_argv, char **argv, char **envp)
 
 	if (pid == 0)
 	{
-		if (execve(correct_path, buff_argv, envp) == -1)
+		if (execve(path, command_argv, envp) == -1)
 		{
 			perror("execve");
 			exit(EXIT_FAILURE);

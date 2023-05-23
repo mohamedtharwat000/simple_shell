@@ -16,20 +16,24 @@ ssize_t _getline_read(char *line, size_t size, size_t fd);
  * The caller is responsible for freeing the memory allocated for *lineptr
  * when it is no longer needed.
  */
-ssize_t _getline(char *buff_line, size_t buff_size, size_t fd)
+ssize_t _getline(char **buff_line, size_t *buff_size, FILE *fd)
 {
-
-	if (buff_size == 0)
+	if (buff_line == NULL || buff_size == NULL || fd == NULL)
 	{
-		buff_size = BUFFSIZE;
-		buff_line = malloc(buff_size);
+		return (-1);
+	}
+
+	if (*buff_size == 0)
+	{
+		*buff_size = 1024;
+		*buff_line = malloc(*buff_size);
 		if (buff_line == NULL)
 		{
 			return (-1);
 		}
 	}
 
-	return (_getline_read(buff_line, buff_size, fd));
+	return (_getline_read(*buff_line, *buff_size, fd->_fileno));
 }
 
 
@@ -49,43 +53,42 @@ ssize_t _getline(char *buff_line, size_t buff_size, size_t fd)
  */
 ssize_t _getline_read(char *line, size_t size, size_t fd)
 {
-	ssize_t total_readed = 0;
-	size_t index = 0;
-	char c, *new_buffer;
+	ssize_t readed = 0;
+	size_t i = 0;
+	char c = '\0', *new_buffer = NULL;
 
 	while (_getc(&c, fd) > 0)
 	{
-		total_readed++;
-		line[index++] = c;
+		readed++;
+		line[i++] = c;
 		if (c == '\n')
 		{
 			break;
 		}
 
-		if (index == size - 1)
+		if (i == size - 1)
 		{
-			size= size * 2;
+			size *= 2;
 			new_buffer = malloc(size);
 			if (new_buffer == NULL)
 			{
+				free(line);
 				return (-1);
 			}
-			_strncpy(new_buffer, line, index);
 			free(line);
 			line = new_buffer;
-			free(new_buffer);
 		}
 	}
 
-	if (total_readed <= 0)
+	if (readed <= 0)
 	{
 		free(line);
 		return (-1);
 	}
 
-	line[index] = '\0';
-
-	return (total_readed);
+	line[i] = '\0';
+	line[i - 1] = '\0';
+	return (readed);
 }
 
 

@@ -9,10 +9,9 @@
  */
 ssize_t interactive_shell(char **argv, char **envp)
 {
-	size_t buff_size = BUFFSIZE;
-	ssize_t read_length = 0, write_length = 0, executed = 0;
 	char *buff_line = NULL, **buff_argv = NULL, *shell_start = "$ ";
-	int i = 0;
+	size_t buff_size = 0, counter = 1;
+	ssize_t read_length = 0, write_length = 0, executed = 0;
 
 	while (1)
 	{
@@ -22,15 +21,11 @@ ssize_t interactive_shell(char **argv, char **envp)
 			perror("");
 			return (-1);
 		}
-		read_length = _getline(buff_line, buff_size, STDIN_FILENO);
+		read_length = _getline(&buff_line, &buff_size, stdin);
 		if (read_length < 1)
 		{
 			perror("");
 			return (-1);
-		}
-		if (buff_line[read_length - 1] == '\n')
-		{
-			buff_line[read_length - 1] = '\0';
 		}
 		buff_argv = split(buff_line, " ");
 		if (buff_argv == NULL)
@@ -38,11 +33,7 @@ ssize_t interactive_shell(char **argv, char **envp)
 			perror("");
 			return (-1);
 		}
-		for (i = 0; buff_argv[i]; i++)
-		{
-			printf("%s\n", buff_argv[i]);
-		}
-		executed = exec_buff(buff_argv[0], buff_argv, argv, envp);
+		executed = exec_buff(buff_argv[0], buff_argv, &counter, argv, envp);
 		if (executed == -1)
 		{
 			perror("");

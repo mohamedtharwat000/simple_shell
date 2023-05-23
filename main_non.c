@@ -1,5 +1,13 @@
+#include "main.h"
 
-
+/**
+ * main - Simple non-interactive shell implementation.
+ * @argc: Number of arguments passed to the program.
+ * @argv: Array of strings representing arguments passed to the program.
+ * @envp: Array of strings representing the environment variables.
+ *
+ * Return: 0 on success or -1 on failure.
+ */
 int main(int argc, char **argv, char **envp)
 {
 	if (argc != 2)

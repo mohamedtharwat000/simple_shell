@@ -7,16 +7,19 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <errno.h>
-#include <string.h>
 
 #define BUFFSIZE 1024
+extern char **environ;
 
 /* Main shell functions */
-ssize_t interactive_shell(char **argv, char **envp);
-ssize_t non_interactive_shell(char **argv, char **envp);
+ssize_t shell(char **argv, char **envp);
+ssize_t shell_interactive(char **argv, char **envp);
+ssize_t shell_noninteractive(char **argv, char **envp);
 
 /* Execute command function */
-int exec_buff(char *command, char **comand_argv, size_t *counter, char **argv, char **envp);
+ssize_t handle_execution(char *readed, char **argv, char **envp,
+												 int *run_counter);
+ssize_t execute_fork(char *command_path, char **readed_argv, char **envp);
 
 /* Path functions */
 char *get_path(char **envp);
@@ -38,12 +41,24 @@ ssize_t _strncmp(char *str1, char *str2, size_t n);
 /* Free allocated array of strings */
 void free_strarr(char **str);
 
-/* Builtin commands struct */
-typedef struct
+
+/* helper function */
+char *numtostr(int num);
+int string_to_number(char *str);
+
+/**
+ * struct builtin - Represents a built-in command
+ * @command: The name of the built-in command
+ * @handle_command: Pointer to the function that handles the command
+ *
+ */
+typedef struct builtin
 {
 	char *command;
-	int (*handle_command)(char *command);
+	ssize_t (*handle_command)(char *command);
 } builtin;
 
+ssize_t is_builtin(char* user_input);
+ssize_t builtin_handler(char **readed_argv);
 
 #endif

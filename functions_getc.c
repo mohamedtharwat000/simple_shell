@@ -5,8 +5,8 @@
  * @c: Pointer to a character variable to store the read character
  * @fd: File descriptor from which to read the character
  *
- * Return: On success, returns the number of bytes read, which is 1 in this case.
- *         On error or end-of-file condition, returns -1.
+ * Return: On success, returns the number of bytes read,
+ * On error or end-of-file condition, returns -1.
  */
 ssize_t _getc(char *c, size_t fd)
 {

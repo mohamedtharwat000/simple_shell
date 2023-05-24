@@ -2,11 +2,10 @@
 
 ssize_t _getline_read(char *line, size_t size, size_t fd);
 
-
 /**
  * _getline - Reads a line of input from a file stream
  * @buff_line: buffer that will store the read line
- * @bufsize: size of the buffer
+ * @buff_size: size of the buffer
  * @fd: file discriptor to read from
  *
  * Return: On success, the function returns the number of characters read,
@@ -18,22 +17,24 @@ ssize_t _getline_read(char *line, size_t size, size_t fd);
  */
 ssize_t _getline(char **buff_line, size_t *buff_size, FILE *fd)
 {
+	size_t size = *buff_size;
+
 	if (buff_line == NULL || buff_size == NULL || fd == NULL)
 	{
 		return (-1);
 	}
 
-	if (*buff_size == 0)
+	if (size == 0)
 	{
-		*buff_size = 1024;
-		*buff_line = malloc(*buff_size);
+		size = 1024;
+		*buff_line = malloc(size);
 		if (buff_line == NULL)
 		{
 			return (-1);
 		}
 	}
 
-	return (_getline_read(*buff_line, *buff_size, fd->_fileno));
+	return (_getline_read(*buff_line, size, fd->_fileno));
 }
 
 
@@ -48,8 +49,6 @@ ssize_t _getline(char **buff_line, size_t *buff_size, FILE *fd)
  * including the newline character, but excluding the null terminator. On
  * failure, it returns -1.
  *
- * The caller is responsible for freeing the memory allocated for *lineptr
- * when it is no longer needed.
  */
 ssize_t _getline_read(char *line, size_t size, size_t fd)
 {

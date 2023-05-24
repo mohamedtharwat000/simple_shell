@@ -1,5 +1,11 @@
 #include "main.h"
-
+/**
+ * search_path - Search for the full path of a command
+ * @command: The command to search for
+ * @path: The PATH environment variable string
+ *
+ * Return: The full path of the command if found, NULL otherwise.
+ */
 char *search_path(char *command, char *path)
 {
 	size_t i = 0, j = 0, k = 0;
@@ -29,14 +35,13 @@ char *search_path(char *command, char *path)
 		correct_path[len - 1] = '\0';
 		if (access(correct_path, F_OK | X_OK) == 0)
 		{
+			free_strarr(path_tokens);
 			return (correct_path);
 		}
-		else
-		{
-			perror("");
-			free(correct_path);
-			break;
-		}
+		free(correct_path);
+		k = 0;
 	}
+
+	free_strarr(path_tokens);
 	return (NULL);
 }

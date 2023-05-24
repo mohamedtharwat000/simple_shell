@@ -8,15 +8,8 @@ char **split_tok(char *str, char *delim, char **words);
  * @str: The string to be split
  * @delim: The delimiter used to split the string
  *
- * This function splits the input string @str into tokens using
- * the delimiter @delim.
- * It returns an array of strings where each string represents a token.
- * The array is terminated with a NULL pointer.
- *
- * @str: The string to be split.
- * @delim: The delimiter used to split the string.
- *
- * Return: An array of strings representing the tokens, or NULL on failure.
+ * Return: An array of strings representing the tokens,
+ * or NULL on failure.
  */
 char **split(char *str, char *delim)
 {
@@ -55,13 +48,6 @@ char **split(char *str, char *delim)
  * count_tokens - Count the number of tokens in a string using a delimiter
  * @str: The string to be counted
  * @delim: The delimiter used to count the tokens
- *
- * This function counts the number of tokens in the input string @str
- * using the delimiter @delim.
- * It returns the count of tokens found in the string.
- *
- * @str: The string to be counted.
- * @delim: The delimiter used to count the tokens.
  *
  * Return: The count of tokens found in the string.
  */
@@ -105,18 +91,10 @@ size_t count_tokens(char *str, char *delim)
 }
 
 /**
- * split_tok - Split a string into tokens using a delimiter and store them in an array
+ * split_tok - Split a string into tokens using a delimiter
  * @str: The string to be split
  * @delim: The delimiter used to split the string
  * @words: An array to store the tokens
- *
- * This function splits the input string @str into tokens using the delimiter @delim and stores them
- * in the array @words. It returns the array of tokens. Memory is allocated for each token using malloc.
- * The array of tokens should be large enough to accommodate all the tokens, including the NULL terminator.
- *
- * @str: The string to be split.
- * @delim: The delimiter used to split the string.
- * @words: An array to store the tokens.
  *
  * Return: The array of tokens.
  */

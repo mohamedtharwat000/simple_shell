@@ -15,13 +15,11 @@ ssize_t handle_execution(char *readed, char **argv, char **envp,
 	char *path = NULL, *command_path = NULL, **readed_argv = NULL;
 
 	(*run_counter)++;
-
 	readed_argv = split(readed, " ");
 	if (readed_argv == NULL)
 	{
 		return (-1);
 	}
-
 	path = get_path(envp);
 	if (path == NULL)
 	{
@@ -29,6 +27,7 @@ ssize_t handle_execution(char *readed, char **argv, char **envp,
 		return (-1);
 	}
 	command_path = search_path(readed_argv[0], path);
+
 	if (command_path == NULL)
 	{
 		if (is_builtin(readed_argv[0]) == 0)

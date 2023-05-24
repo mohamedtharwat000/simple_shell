@@ -58,7 +58,7 @@ typedef struct builtin
 	ssize_t (*handle_command)(char *command);
 } builtin;
 
-ssize_t is_builtin(char* user_input);
+ssize_t is_builtin(char *user_input);
 ssize_t builtin_handler(char **readed_argv);
 
 #endif

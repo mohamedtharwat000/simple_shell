@@ -17,14 +17,15 @@ ssize_t shell_noninteractive(char **argv, char **envp)
 	if (readed < 0)
 	{
 		perror("");
+		free(buff_line);
 		return (-1);
 	}
 	executed = handle_execution(buff_line, argv, envp, &run_counter);
 	if (executed < 0)
 	{
 		perror("");
+		free(buff_line);
 	}
 
-	free(buff_line);
 	return (0);
 }

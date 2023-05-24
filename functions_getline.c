@@ -76,6 +76,7 @@ ssize_t _getline_read(char *line, size_t size, size_t fd)
 			}
 			free(line);
 			line = new_buffer;
+			free(new_buffer);
 		}
 	}
 

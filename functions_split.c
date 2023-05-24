@@ -36,6 +36,7 @@ char **split(char *str, char *delim)
 	words = split_tok(str, delim, words);
 	if (!words)
 	{
+
 		return (NULL);
 	}
 
@@ -116,6 +117,7 @@ char **split_tok(char *str, char *delim, char **words)
 				token = malloc(length + 1);
 				if (!token)
 				{
+					free_strarr(words);
 					return (NULL);
 				}
 				_strncpy(token, &str[start], length);
@@ -144,6 +146,7 @@ char **split_tok(char *str, char *delim, char **words)
 			token = malloc(length + 1);
 			if (!token)
 			{
+				free_strarr(words);
 				return (NULL);
 			}
 			_strncpy(token, &str[start], length);
@@ -154,6 +157,7 @@ char **split_tok(char *str, char *delim, char **words)
 
 	if (next_word == 0)
 	{
+		free_strarr(words);
 		return (NULL);
 	}
 

@@ -45,6 +45,7 @@ void free_strarr(char **arr);
 /* helper function */
 char *numtostr(int num);
 int string_to_number(char *str);
+void _memset(char *ptr, size_t size);
 
 /**
  * struct builtin - Represents a built-in command

@@ -29,14 +29,13 @@ ssize_t _getline(char **buff_line, size_t *buff_size, FILE *fd)
 		*buff_line = malloc(*buff_size);
 		if (*buff_line == NULL)
 			return (-1);
+		_memset(*buff_line, *buff_size);
 	}
 	while (_getc(&c, fd->_fileno) > 0)
 	{
 		readed++;
 		if (c == '\n')
-		{
 			break;
-		}
 		if (i == *buff_size - 1)
 		{
 			*buff_size *= 2;
@@ -46,6 +45,7 @@ ssize_t _getline(char **buff_line, size_t *buff_size, FILE *fd)
 				free(*buff_line);
 				return (-1);
 			}
+			_memset(new_buffer, *buff_size);
 			_strncpy(new_buffer, *buff_line, i);
 			free(*buff_line);
 			*buff_line = new_buffer;

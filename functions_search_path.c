@@ -61,6 +61,7 @@ char *get_correct_path(char **path_tokens, char *command)
 			free_strarr(path_tokens);
 			return (NULL);
 		}
+		_memset(correct_path, total_len);
 		for (j = 0; j < total_len; j++)
 		{
 			correct_path[j] = '\0';

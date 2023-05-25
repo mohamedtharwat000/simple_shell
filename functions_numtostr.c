@@ -22,6 +22,8 @@ char *numtostr(int num)
 	{
 		return (NULL);
 	}
+	_memset(str, length + 1);
+
 
 	str[length] = '\0';
 	for (i = length - 1; i >= 0; i--)

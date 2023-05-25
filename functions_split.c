@@ -32,6 +32,7 @@ char **split(char *str, char *delim)
 	{
 		return (NULL);
 	}
+	_memset((char *)words, count + 1);
 
 	words = split_tok(str, delim, words);
 	if (!words)
@@ -119,6 +120,7 @@ char **split_tok(char *str, char *delim, char **words)
 					free_strarr(words);
 					return (NULL);
 				}
+				_memset(token, length + 1);
 				_strncpy(token, &str[start], length);
 				token[length] = '\0';
 				words[next_word++] = token;
@@ -148,6 +150,7 @@ char **split_tok(char *str, char *delim, char **words)
 				free_strarr(words);
 				return (NULL);
 			}
+			_memset(token, length + 1);
 			_strncpy(token, &str[start], length);
 			token[length] = '\0';
 			words[next_word++] = token;

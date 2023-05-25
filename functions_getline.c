@@ -1,57 +1,47 @@
-#include "main.h"
+#include "header_main.h"
 
 /**
- * _getline - Reads a line of input from a file stream
- * @buff_line: buffer that will store the read line
- * @buff_size: size of the buffer
- * @fd: file descriptor to read from
- *
- * Return: On success, the function returns the number of characters read,
- * including the newline character, but excluding the null terminator.
- * On failure, it returns -1.
- *
- * The caller is responsible for freeing the memory allocated buff_line
- * when it is no longer needed.
+ * get_line - stores into malloced buffer the user's command into shell
+ * @str: buffer
+ * Return: number of characters read
  */
-ssize_t _getline(char **buff_line, size_t *buff_size, FILE *fd)
+size_t get_line(char **str)
 {
-	ssize_t readed = 0;
-	size_t i = 0;
-	char c = '\0', *new_buffer = NULL;
+	ssize_t i = 0, size = 0, t = 0, t2 = 0, n = 0;
+	char buff[BUFFSIZE];
 
-	if (buff_line == NULL || buff_size == NULL || fd == NULL)
+	while (t2 == 0 && (i = read(STDIN_FILENO, buff, BUFFSIZE - 1)))
 	{
-		return (-1);
-	}
-	if (*buff_size == 0 || *buff_line == NULL)
-	{
-		*buff_size = 1024;
-		*buff_line = malloc(*buff_size);
-		if (*buff_line == NULL)
-			return (-1);
-		_memset(*buff_line, *buff_size);
-	}
-	while (_getc(&c, fd->_fileno) > 0)
-	{
-		readed++;
-		if (c == '\n')
-			break;
-		if (i == *buff_size - 1)
+		if (i == -1)
 		{
-			*buff_size *= 2;
-			new_buffer = malloc(*buff_size);
-			if (new_buffer == NULL)
-			{
-				free(*buff_line);
-				return (-1);
-			}
-			_memset(new_buffer, *buff_size);
-			_strncpy(new_buffer, *buff_line, i);
-			free(*buff_line);
-			*buff_line = new_buffer;
+			return (-1);
 		}
-		(*buff_line)[i++] = c;
-		(*buff_line)[i] = '\0';
+
+		buff[i] = '\0';
+
+		n = 0;
+		while (buff[n] != '\0')
+		{
+			if (buff[n] == '\n')
+			{
+				t2 = 1;
+			}
+			n++;
+		}
+
+		if (t == 0)
+		{
+			i++;
+			*str = malloc(sizeof(char) * i);
+			*str = _strcpy(*str, buff);
+			size = i;
+			t = 1;
+		}
+		else
+		{
+			size += i;
+			*str = _strcat(*str, buff);
+		}
 	}
-	return (readed);
+	return (size);
 }

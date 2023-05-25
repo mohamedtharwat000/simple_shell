@@ -1,21 +1,19 @@
-#include "main.h"
+#include "header_main.h"
+
 /**
- * main - Entry point of the program
- * @argc: Number of command-line arguments
- * @argv: Array of command-line argument strings
- * @envp: Array of environment variable strings
- *
- * Return: Exit status of the program
- *
+ * main - creates a simple shell
+ * @ac: argument count
+ * @av: argument vectors
+ * @env: environmental variables
+ * Return: 0 on success
  */
-int main(int argc, char **argv, char **envp)
+int main(int ac, char **av, char **env)
 {
-	int status = 0;
+	(void)ac;
+	(void)av;
 
-	(void)argc;
-	(void)envp;
+	/* Prompt user */
+	Shell_start(env);
 
-	status = shell(argv);
-
-	return (status);
+	return (0);
 }

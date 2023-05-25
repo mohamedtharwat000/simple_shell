@@ -1,5 +1,5 @@
-#ifndef SHELL_H
-#define SHELL_H
+#ifndef MAIN_H
+#define MAIN_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,10 +12,7 @@
 #include <limits.h>
 #include <fcntl.h>
 
-
-#define READ_BUF_SIZE 1024
-#define WRITE_BUF_SIZE 1024
-#define BUF_FLUSH -1
+#define BUFFSIZE 1024
 extern char **environ;
 
 /* Main shell functions */

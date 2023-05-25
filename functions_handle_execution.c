@@ -59,7 +59,6 @@ ssize_t handle_execution(char **readed, char **argv, size_t *counter)
 		free_strarr(readed_argv);
 	}
 
-
 	return (status);
 }
 

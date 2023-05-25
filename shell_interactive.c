@@ -38,6 +38,7 @@ ssize_t shell_interactive(char **argv)
 			{
 				free(buff_line);
 			}
+			buff_line = NULL;
 		}
 	}
 	return (0);

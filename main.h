@@ -33,6 +33,7 @@ ssize_t _getline(char **buff, size_t *buff_size, FILE *fd);
 
 /* String functions */
 size_t _strlen(char *str);
+char *_strcat(char *dest, char *src);
 char **split(char *str, char *delim);
 char *_strncpy(char *dest, char *src, size_t n);
 ssize_t _strncmp(char *str1, char *str2, size_t n);

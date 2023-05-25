@@ -13,7 +13,9 @@
 #include <fcntl.h>
 
 
-#define BUFFSIZE 1024
+#define READ_BUF_SIZE 1024
+#define WRITE_BUF_SIZE 1024
+#define BUF_FLUSH -1
 extern char **environ;
 
 /* Main shell functions */

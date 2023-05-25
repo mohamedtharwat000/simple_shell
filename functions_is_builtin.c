@@ -7,7 +7,7 @@
  */
 ssize_t is_builtin(char *user_input)
 {
-	size_t i = 0;
+	ssize_t i = 0;
 	char *builtins[] = {
 		"exit",
 		"env",
@@ -19,7 +19,7 @@ ssize_t is_builtin(char *user_input)
 		if (_strncmp(user_input, builtins[i],
 								 _strlen(user_input)) == 0)
 		{
-			return (0);
+			return (i);
 		}
 	}
 

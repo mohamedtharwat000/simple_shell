@@ -1,17 +1,17 @@
 #include "main.h"
 
-ssize_t handle_exit(char *command);
-ssize_t handle_env(char *command);
+ssize_t handle_exit(void);
+ssize_t handle_env(void);
 
 /**
  * builtin_handler - Handle built-in commands
- * @readed_argv: Array of command-line arguments
+ * @builtin_num: number -> builtin command
  *
  * Return: 0 if a match is found and handled, -1 otherwise.
  */
-ssize_t builtin_handler(char **readed_argv)
+ssize_t builtin_handler(ssize_t builtin_num)
 {
-	size_t i = 0;
+	ssize_t i = 0;
 	builtin builtins[] = {
 		{"exit", handle_exit},
 		{"env", handle_env},
@@ -20,10 +20,9 @@ ssize_t builtin_handler(char **readed_argv)
 
 	for (i = 0; builtins[i].command; i++)
 	{
-		if (_strncmp(readed_argv[0], builtins[i].command,
-								 _strlen(builtins[i].command)) == 0)
+		if (i == builtin_num)
 		{
-			builtins[i].handle_command(readed_argv[1]);
+			builtins[i].handle_command();
 			return (0);
 		}
 	}
@@ -34,7 +33,6 @@ ssize_t builtin_handler(char **readed_argv)
 
 /**
  * handle_exit - Handle the "exit" command
- * @command: The command argument (optional)
  *
  * If the command argument is provided,
  * it converts it to an integer and exits the program with that value.
@@ -42,30 +40,21 @@ ssize_t builtin_handler(char **readed_argv)
  *
  * Return: always 0.
  */
-ssize_t handle_exit(char *command)
+ssize_t handle_exit(void)
 {
-	if (command == NULL)
-	{
-		exit(0);
-	}
-	else
-	{
-		exit(string_to_number(command));
-	}
+	exit(0);
 	return (0);
 }
 
 /**
  * handle_env - Handle the "env" command
- * @command: The command argument (optional)
  *
  * Prints the environment variables.
  * Return: always 0.
  */
-ssize_t handle_env(char *command)
+ssize_t handle_env(void)
 {
 	char **envp = environ;
-	(void)command;
 
 	while (*envp != NULL)
 	{

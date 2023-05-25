@@ -105,7 +105,6 @@ char **split_tok(char *str, char *delim, char **words)
 	size_t dlen = _strlen(delim);
 	char *token = NULL;
 
-
 	while (str[i])
 	{
 		if (_strncmp(&str[i], delim, dlen) == 0)

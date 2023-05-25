@@ -70,12 +70,12 @@ char *get_correct_path(char **path_tokens, char *command)
 		_strcat(correct_path, command);
 		if (access(correct_path, F_OK | X_OK) == 0)
 		{
-			return correct_path;
+			return (correct_path);
 		}
 		free(correct_path);
 		correct_path = NULL;
 		i++;
 	}
 
-	return NULL;
+	return (NULL);
 }

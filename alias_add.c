@@ -1,9 +1,11 @@
 #include "headers_shell.h"
 
 /**
- * _alias - add or print alias.
- * @cmd: arg 1.
- * @global: arg 2.
+ * _alias - Creates and manages aliases
+ * @cmd: The command to execute
+ * @global: The global variables struct
+ *
+ * Return: void
  */
 void _alias(char **cmd, global_t *global)
 {

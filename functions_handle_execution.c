@@ -1,54 +1,79 @@
 #include "main.h"
+
+void puts_onerror(char *shell_name, char *err_num);
+
 /**
  * handle_execution - Execute a command
  * @readed: The input string read
  * @argv: The command-line arguments
- * @envp: The environment variables
- * @run_counter: Pointer to a counter for executed commands
+ * @counter: Pointer to a counter for executed commands
  *
  * Return: 0 on success, -1 on failure.
  */
-ssize_t handle_execution(char *readed, char **argv, char **envp,
-												 int *run_counter)
+ssize_t handle_execution(char **readed, char **argv, size_t *counter)
 {
-	ssize_t status = 0;
-	char *path = NULL, *command_path = NULL, **readed_argv = NULL;
+	ssize_t builtin_num = -1, status = -1;
+	char *command_path = NULL, **readed_argv = NULL, *counter_str = NULL;
+	char *command = NULL;
 
-	(*run_counter)++;
+	(*counter)++;
 
-	readed_argv = split(readed, " ");
+	readed_argv = split(*readed, " ");
 	if (readed_argv == NULL)
 	{
-		return (-1);
+		return (status);
 	}
 
-	path = get_path(envp);
-	if (path == NULL)
+	command = readed_argv[0];
+	builtin_num = is_builtin(command);
+
+	if (builtin_num != -1)
 	{
+		free(*readed);
+		*readed = NULL;
 		free_strarr(readed_argv);
-		return (-1);
+		status = builtin_handler(builtin_num);
+		return (status);
 	}
-	command_path = search_path(readed_argv[0], path);
-	if (command_path == NULL)
+
+	command_path = search_path(readed_argv[0]);
+	if (command_path != NULL)
 	{
-		if (is_builtin(readed_argv[0]) == 0)
+		status = execute_fork(command_path, readed_argv);
+		if (_strncmp(command_path, command, _strlen(command_path)) == 0)
 		{
-			status = builtin_handler(readed_argv);
-			return (status);
+			free_strarr(readed_argv);
 		}
 		else
 		{
-			_puts(argv[0], STDOUT_FILENO);
-			_puts(": ", STDOUT_FILENO);
-			_puts(numtostr(*run_counter), STDOUT_FILENO);
-			_puts(": ", STDOUT_FILENO);
-			return (-1);
+			free(command_path);
+			command_path = NULL;
+			free_strarr(readed_argv);
 		}
 	}
 	else
 	{
-		status = execute_fork(command_path, readed_argv, envp);
+		counter_str = numtostr(*counter);
+		puts_onerror(argv[0], counter_str);
+		free(counter_str);
+		free_strarr(readed_argv);
 	}
-	free_strarr(readed_argv);
+
+
 	return (status);
+}
+
+
+/**
+ * puts_onerror - puts error
+ * @shell_name: shell_name
+ * @counter_str: counter_str
+ * Return: void
+ */
+void puts_onerror(char *shell_name, char *counter_str)
+{
+	_puts(shell_name, STDOUT_FILENO);
+	_puts(": ", STDOUT_FILENO);
+	_puts(counter_str, STDOUT_FILENO);
+	_puts(": ", STDOUT_FILENO);
 }

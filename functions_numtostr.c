@@ -17,15 +17,19 @@ char *numtostr(int num)
 		temp /= 10;
 	}
 
-	str = (char *)malloc((length + 1) * sizeof(char));
+	str = malloc(length + 1);
+	if (!str)
+	{
+		return (NULL);
+	}
 
+	str[length] = '\0';
 	for (i = length - 1; i >= 0; i--)
 	{
 		str[i] = (num % 10) + '0';
 		num /= 10;
 	}
 
-	str[length] = '\0';
 
 	return (str);
 }

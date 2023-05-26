@@ -2,16 +2,22 @@
 
 /**
  * free_strarr - Frees memory allocated for an array of strings
- * @str: Pointer to the array of strings to be freed
+ * @arr: Pointer to the array of strings to be freed
  *
  */
-void free_strarr(char **str)
+void free_strarr(char **arr)
 {
-	size_t i;
+	size_t i = 0;
 
-	for (i = 0; str[i]; i++)
+	if (arr == NULL)
 	{
-		free(str[i]);
+		return;
 	}
-	free(str);
+
+	for (; arr[i]; i++)
+	{
+		free(arr[i]);
+	}
+
+	free(arr);
 }

@@ -1,27 +1,36 @@
 #include "headers_shell.h"
 
 /**
- * is_num - is number.
- * @str: arg 1.
- * Return: 1 if is number.
+ * shell_exit - exit the shell.
+ * @cmd: arg 1;
+ * @global: arg 2.
  */
-int	is_num(char *str)
+void shell_exit(char **cmd, global_t *global)
 {
-	int i = 0;
+	int n;
 
-	if (str[0] && (str[0] == '-' || str[0] == '+'))
-		i++;
-	if (!str[i])
-		return (0);
-	while (str[i] && str[i] == '0')
+	if (!cmd[1])
 	{
+		n = global->exit_code;
+		free_all(global);
+		exit(n);
 	}
-	while (str[i])
+	else
 	{
-		if (str[i] > '9' || str[i] < '0')
-			return (0);
-		i++;
+		if (!is_num(cmd[1]) || _atoi(cmd[1]) < 0)
+		{
+			_puts(global->name, 2, 0);
+			_puts(": ", 2, 0);
+			putnbr_fd(global->n, 2);
+			_puts(": exit: Illegal number: ", 2, 0);
+			_puts(cmd[1], 2, 1);
+			global->exit_code = 2;
+		}
+		else
+		{
+			n = _atoi(cmd[1]);
+			free_all(global);
+			exit((unsigned char)n);
+		}
 	}
-	return (1);
 }
-

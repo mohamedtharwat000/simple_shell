@@ -1,23 +1,25 @@
 #include "headers_shell.h"
 
 /**
- *ft_abs - abs.
- *@nb: arg 1.
- *Return: pos num.
+ * ft_abs - abs.
+ * @nb: arg 1.
+ * Return: pos num.
  */
-static int	ft_abs(int nb)
+static int ft_abs(int nb)
 {
 	if (nb < 0)
+	{
 		return (nb * -1);
+	}
 	return (nb);
 }
 
 /**
- *ft_nbrpow - pow.
- *@nbr: arg 1.
- *Return: pow.
+ * ft_nbrpow - pow.
+ * @nbr: arg 1.
+ * Return: pow.
  */
-static int	ft_nbrpow(int nbr)
+static int ft_nbrpow(int nbr)
 {
 	int	pow;
 
@@ -31,21 +33,23 @@ static int	ft_nbrpow(int nbr)
 }
 
 /**
- *_itoa - int to array of chars.
- *@n: arg 1.
- *Return: string.
+ * _itoa - int to array of chars.
+ * @n: arg 1.
+ * Return: string.
  */
-char	*_itoa(int n)
+char *_itoa(int n)
 {
-	char	*res;
-	int		len;
-	int		neg;
+	char *res;
+	int len;
+	int neg;
 
 	neg = n < 0;
 	len = ft_nbrpow(n) + neg;
 	res = malloc(sizeof(char) * len + 1);
 	if (!res)
+	{
 		return (NULL);
+	}
 	res[len--] = '\0';
 	while (len >= 0)
 	{
@@ -54,6 +58,8 @@ char	*_itoa(int n)
 		len--;
 	}
 	if (neg)
+	{
 		res[0] = '-';
+	}
 	return (res);
 }

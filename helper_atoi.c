@@ -7,9 +7,9 @@
  */
 int _atoi(char *s)
 {
-	unsigned int	n;
-	int				sign;
-	int				i;
+	unsigned int n;
+	int sign;
+	int i;
 
 	n = 0;
 	i = 0;
@@ -17,11 +17,15 @@ int _atoi(char *s)
 	while (s[i] && (s[i] == '+' || s[i] == '-' || s[i] == ' ' || s[i] == '\t'))
 	{
 		if (s[i] == '-')
+		{
 			sign++;
+		}
 		i++;
 	}
 	while (s[i] && (s[i] < '0' || s[i] > '9'))
+	{
 		i++;
+	}
 	while (s[i] && s[i] >= '0' && s[i] <= '9')
 	{
 		n *= 10;
@@ -29,6 +33,8 @@ int _atoi(char *s)
 		i++;
 	}
 	if (sign % 2 == 0)
+	{
 		return (n);
+	}
 	return (-n);
 }

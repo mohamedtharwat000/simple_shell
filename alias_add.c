@@ -10,7 +10,7 @@
 void _alias(char **cmd, global_t *global)
 {
 	alias_t *ptr = global->alias;
-	int		i = 1;
+	int i = 1;
 
 	global->exit_code = 0;
 	if (!cmd[1])

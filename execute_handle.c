@@ -1,14 +1,14 @@
 #include "headers_shell.h"
 
 /**
- *exec_binary - Execute binary fils.
- *@command: arg 1.
- *@global: arg 2.
+ * exec_binary - Execute binary fils.
+ * @command: arg 1.
+ * @global: arg 2.
  */
 void	exec_binary(command_t *command, global_t *global)
 {
-	pid_t	n;
-	int		m;
+	pid_t n;
+	int m;
 
 	if (!command->path)
 	{
@@ -24,32 +24,38 @@ void	exec_binary(command_t *command, global_t *global)
 	{
 		n = fork();
 		if (!n)
+		{
 			execve(command->path, command->args, global->envp);
+		}
 		else
 		{
 			waitpid(n, &m, 0);
 			if (WIFEXITED(m))
+			{
 				global->exit_code = WEXITSTATUS(m);
+			}
 		}
 	}
 }
 
 /**
- *executing - Execute commands.
- *@global: arg 1.
+ * executing - Execute commands.
+ * @global: arg 1.
  */
 void	executing(global_t *global)
 {
 	command_t	*tmp = global->commands;
-	char		**str;
-	id_t		i = 0;
+	char **str;
+	id_t i = 0;
 
 	while (tmp)
 	{
 		if (tmp->args)
 		{
 			if (!builtin_execute(tmp->args, global))
+			{
 				exec_binary(tmp, global);
+			}
 		}
 		else if (tmp->tmp)
 		{

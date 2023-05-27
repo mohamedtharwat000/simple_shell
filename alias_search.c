@@ -6,7 +6,7 @@
  * @global: arg 2.
  * Return: string or NULL.
  */
-char	*alias_search(char	*str, global_t *global)
+char *alias_search(char	*str, global_t *global)
 {
 	alias_t	*ptr;
 
@@ -25,7 +25,7 @@ char	*alias_search(char	*str, global_t *global)
  * @global: arg 2.
  * Return: alias_t or NULL.
  */
-alias_t	*search_alias(char	*str, global_t *global)
+alias_t *search_alias(char	*str, global_t *global)
 {
 	alias_t	*ptr;
 

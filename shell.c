@@ -1,25 +1,27 @@
 #include "headers_shell.h"
 /**
- *handler - signal handler for Ctrl+C=SIGINT.
- *@sig: arg 1.
+ * handler - signal handler for Ctrl+C=SIGINT.
+ * @sig: arg 1.
  */
 void handler(int sig)
 {
 	if (sig == SIGINT)
+	{
 		write(1, "\n$ ", 3);
+	}
 }
 
 /**
- *main - main function.
- *@ac: The number of arguments
- *@av: Array of argument strings
- *@env: Array of environment string
+ * main - main function.
+ * @ac: The number of arguments
+ * @av: Array of argument strings
+ * @env: Array of environment string
  * Return: 0 always
  */
 int main(int ac, char **av, char **env)
 {
-	char		*ptr, fd = 0;
-	global_t	*global;
+	char *ptr, fd = 0;
+	global_t *global;
 
 	signal(SIGINT, handler);
 	global = malloc(sizeof(global_t));

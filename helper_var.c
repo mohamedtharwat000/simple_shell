@@ -1,10 +1,10 @@
 #include "headers_shell.h"
 
 /**
- *help_va_re - variables replacement.
- *@ptr: arg 1.
- *@global: arg 2.
- *Return: pointer to  modified string
+ * help_va_re - variables replacement.
+ * @ptr: arg 1.
+ * @global: arg 2.
+ * Return: pointer to  modified string
  */
 char *help_va_re(char *ptr, global_t *global)
 {
@@ -40,15 +40,15 @@ char *help_va_re(char *ptr, global_t *global)
 }
 
 /**
- *va_re - variables replacement.
- *@ptr: arg 1.
- *@global: arg 2.
- *Return: pointer to  modified string
+ * va_re - variables replacement.
+ * @ptr: arg 1.
+ * @global: arg 2.
+ * Return: pointer to  modified string
  */
-char	*va_re(char *ptr, global_t *global)
+char *va_re(char *ptr, global_t *global)
 {
-	char	*str = NULL, *tmp;
-	int		i = 0, m = 0;
+	char *str = NULL, *tmp;
+	int i = 0, m = 0;
 
 	if (!ptr)
 		return (NULL);

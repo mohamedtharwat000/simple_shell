@@ -1,9 +1,9 @@
 #include "headers_shell.h"
 
 /**
- *help_cd - help cd function.
- *@cmd: arg 1.
- *@global: arg 2.
+ * help_cd - help cd function.
+ * @cmd: arg 1.
+ * @global: arg 2.
  */
 void help_cd(char **cmd, global_t *global)
 {
@@ -42,9 +42,9 @@ void help_cd(char **cmd, global_t *global)
 }
 
 /**
- *help_cd2 - help cd function.
- *@cmd: arg 1.
- *@global: arg 2.
+ * help_cd2 - help cd function.
+ * @cmd: arg 1.
+ * @global: arg 2.
  */
 void help_cd2(char **cmd, global_t *global)
 {
@@ -78,9 +78,9 @@ void help_cd2(char **cmd, global_t *global)
 }
 
 /**
- *cd - change the current directory.
- *@cmd: arg 1.
- *@global: arg 2.
+ * cd - change the current directory.
+ * @cmd: arg 1.
+ * @global: arg 2.
  */
 void cd(char **cmd, global_t *global)
 {

@@ -5,21 +5,27 @@
  *@lst: arg 1.
  *@new: arg 2.
  */
-void	lstadd_back_env(env_t **lst, env_t *new)
+void lstadd_back_env(env_t **lst, env_t *new)
 {
-	env_t	*item;
+	env_t *item;
 
 	if (!lst || !new)
+	{
 		return;
+	}
 	item = *lst;
 	if (*lst)
 	{
 		while (item->next)
+		{
 			item = item->next;
+		}
 		item->next = new;
 	}
 	else
+	{
 		*lst = new;
+	}
 }
 
 /**

@@ -30,6 +30,8 @@ int _puts(char *str, int fd, int new)
 {
 	write(fd, str, _strlen(str));
 	if (new)
+	{
 		return (write(fd, "\n", 1));
+	}
 	return (1);
 }

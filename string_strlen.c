@@ -1,16 +1,18 @@
 #include "headers_shell.h"
 
 /**
- *_strlen - calculate the length.
- *@s: arg 1.
- *Return:The length.
+ * _strlen - calculate the length.
+ * @s: arg 1.
+ * Return:The length.
  */
-size_t	_strlen(const char *s)
+size_t _strlen(const char *s)
 {
-	size_t	l;
+	size_t length;
 
-	l = 0;
-	while (s[l])
-		l++;
-	return (l);
+	length = 0;
+	while (s[length])
+	{
+		length++;
+	}
+	return (length);
 }

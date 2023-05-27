@@ -1,11 +1,11 @@
 #include "headers_shell.h"
 
 /**
- *is_lo_op - con || or &&.
- *@str: arg 1.
- *Return: 0 or 1.
+ * is_lo_op - con || or &&.
+ * @str: arg 1.
+ * Return: 0 or 1.
  */
-int	is_lo_op(char *str)
+int is_lo_op(char *str)
 {
 	int	i = 0;
 
@@ -21,12 +21,12 @@ int	is_lo_op(char *str)
 }
 
 /**
- *count_words - count number of words.
- *@str: arg 1.
- *@global: arg 2.
- *Return: number of words.
+ * count_words - count number of words.
+ * @str: arg 1.
+ * @global: arg 2.
+ * Return: number of words.
  */
-int	count_words(char *str, global_t *global)
+int count_words(char *str, global_t *global)
 {
 	int	count = 0, c = 1, i = 0;
 
@@ -68,15 +68,15 @@ int	count_words(char *str, global_t *global)
 }
 
 /**
- *copy_str - dup an new word.
- *@str: arg 1.
- *@index: arg 2.
- *Return: new word.
+ * copy_str - dup an new word.
+ * @str: arg 1.
+ * @index: arg 2.
+ * Return: new word.
  */
 char *copy_str(char *str, int *index)
 {
-	int		i = *index, start, len = 0;
-	char	*ptr;
+	int i = *index, start, len = 0;
+	char *ptr;
 
 	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 		i++;
@@ -114,15 +114,15 @@ char *copy_str(char *str, int *index)
 }
 
 /**
- *advanced_split - split words.
- *@str: arg 1.
- *@global: arg 2.
- *Return: array of strings.
+ * advanced_split - split words.
+ * @str: arg 1.
+ * @global: arg 2.
+ * Return: array of strings.
  */
 char **advanced_split(char *str, global_t *global)
 {
-	int		count = count_words(str, global), i = 0, index = 0;
-	char	**ptr;
+	int count = count_words(str, global), i = 0, index = 0;
+	char **ptr;
 
 	if (!count)
 		return (NULL);
@@ -137,14 +137,14 @@ char **advanced_split(char *str, global_t *global)
 }
 
 /**
- *exec_logical_operators - exec_logical_operators.
- *@str: arg 1.
- *@global: arg 2.
+ * exec_logical_operators - exec_logical_operators.
+ * @str: arg 1.
+ * @global: arg 2.
  */
 void exec_logical_operators(char **str, global_t *global)
 {
-	int		i = 0;
-	char	n = 0, m, v = 1;
+	int i = 0;
+	char n = 0, m, v = 1;
 	command_t	*node = malloc(sizeof(command_t));
 
 	while (str[i])

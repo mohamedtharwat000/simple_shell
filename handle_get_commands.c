@@ -1,21 +1,23 @@
 #include "headers_shell.h"
 
 /**
- *get_path - Get the path of a command.
- *@str: arg 1.
- *@global: arg 2.
- *Return: The Path of the command.
+ * get_path - Get the path of a command.
+ * @str: arg 1.
+ * @global: arg 2.
+ * Return: The Path of the command.
  */
-char	*get_path(char *str, global_t *global)
+char *get_path(char *str, global_t *global)
 {
-	char	*ptr = _strdup(str), **paths, *tmp;
-	int		i = 0;
+	char *ptr = _strdup(str), **paths, *tmp;
+	int  i = 0;
 
 	if (!access(ptr, F_OK))
 	{
 		if (!_strncmp(ptr, "/", 1) || !_strncmp(ptr, "./", 2) ||
 				!_strncmp(ptr, "../", 3))
+		{
 			return (ptr);
+		}
 	}
 	paths = split(env_search("PATH", global), ':');
 	if (!paths)
@@ -48,12 +50,12 @@ char	*get_path(char *str, global_t *global)
 }
 
 /**
- *get_paths - Get the full paths of commands.
- *@global: arg 2.
+ * get_paths - Get the full paths of commands.
+ * @global: arg 2.
  */
-void	get_paths(global_t *global)
+void get_paths(global_t *global)
 {
-	command_t	*tmp = global->commands;
+	command_t *tmp = global->commands;
 
 	while (tmp)
 	{
@@ -64,15 +66,15 @@ void	get_paths(global_t *global)
 }
 
 /**
- *get_commands - parse and store the commands.
- *@ptr: arg 1.
- *@global: arg 2.
+ * get_commands - parse and store the commands.
+ * @ptr: arg 1.
+ * @global: arg 2.
  */
-void	get_commands(char *ptr, global_t *global)
+void get_commands(char *ptr, global_t *global)
 {
-	char	    **commands;
-	int         i = 0;
-	command_t   *node;
+	char **commands;
+	int i = 0;
+	command_t *node;
 
 	free_commands(global);
 	if (!ptr)

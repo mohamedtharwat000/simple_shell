@@ -13,9 +13,10 @@ int main(int argc, char **argv, char **envp)
 	int status = 0;
 
 	(void)argc;
+	(void)argv;
 	(void)envp;
 
-	status = shell(argv);
+	status = shell();
 
 	return (status);
 }

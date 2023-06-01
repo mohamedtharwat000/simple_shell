@@ -20,38 +20,39 @@ ssize_t _getline(char **buff_line, size_t *buff_size, FILE *fd)
 	char c = '\0', *new_buffer = NULL;
 
 	if (buff_line == NULL || buff_size == NULL || fd == NULL)
-	{
 		return (-1);
-	}
+
 	if (*buff_size == 0 || *buff_line == NULL)
 	{
 		*buff_size = 1024;
 		*buff_line = malloc(*buff_size);
 		if (*buff_line == NULL)
 			return (-1);
+
+		null_fill(*buff_line, *buff_size);
 	}
 	while (_getc(&c, fd->_fileno) > 0)
 	{
-		readed++;
-		if (c == '\n')
-		{
-			break;
-		}
 		if (i == *buff_size - 1)
 		{
 			*buff_size *= 2;
 			new_buffer = malloc(*buff_size);
 			if (new_buffer == NULL)
 			{
-				free(*buff_line);
+				_free(buff_line);
 				return (-1);
 			}
+			null_fill(new_buffer, *buff_size);
 			_strncpy(new_buffer, *buff_line, i);
-			free(*buff_line);
+			_free(buff_line);
 			*buff_line = new_buffer;
 		}
+		readed++;
 		(*buff_line)[i++] = c;
 		(*buff_line)[i] = '\0';
+		if (c == '\n')
+			break;
+
 	}
 	return (readed);
 }

@@ -1,31 +1,41 @@
 #include "main.h"
 /**
  * shell_noninteractive - Run the shell in non-interactive mode
- * @argv: Array of command-line arguments
  *
  * Return: 0 on success, -1 on failure
  */
-ssize_t shell_noninteractive(char **argv)
+ssize_t shell_noninteractive(void)
 {
 	char *buff_line = NULL;
-	ssize_t readed = 0, executed = 0;
-	size_t run_counter = 0;
-	static size_t buff_size;
+	static size_t buff_size, run_counter;
+	ssize_t readed = 0, executed = 0, status = 0;
+	size_t total_readed = 0;
 
-	readed = _getline(&buff_line, &buff_size, stdin);
-	if (readed <= 0)
+	while (readed >= 0)
 	{
-		perror("");
-		free(buff_line);
-		return (-1);
-	}
-	executed = handle_execution(&buff_line, argv, &run_counter);
-	if (executed < 0)
-	{
-		perror("");
-		free(buff_line);
-		return (-1);
+		readed = _getline(&buff_line, &buff_size, stdin);
+
+		if (readed < 0)
+		{
+			status = -1;
+			return (status);
+		}
+
+		if (readed > 0)
+		{
+			total_readed += readed;
+			buff_line += readed;
+		}
+
+		if (readed == 0)
+		{
+			break;
+		}
 	}
 
-	return (0);
+	buff_line -= total_readed;
+
+	executed = handle_execution(&buff_line, &run_counter);
+
+	return (executed);
 }

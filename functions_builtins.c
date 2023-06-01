@@ -5,14 +5,14 @@ ssize_t handle_env(void);
 
 /**
  * builtin_handler - Handle built-in commands
- * @builtin_num: number -> builtin command
+ * @builtin: number -> builtin command
  *
  * Return: 0 if a match is found and handled, -1 otherwise.
  */
-ssize_t builtin_handler(ssize_t builtin_num)
+ssize_t builtin_handler(ssize_t builtin)
 {
 	ssize_t i = 0;
-	builtin builtins[] = {
+	builtin_t builtins[] = {
 		{"exit", handle_exit},
 		{"env", handle_env},
 		{NULL, NULL}
@@ -20,7 +20,7 @@ ssize_t builtin_handler(ssize_t builtin_num)
 
 	for (i = 0; builtins[i].command; i++)
 	{
-		if (i == builtin_num)
+		if (i == builtin)
 		{
 			builtins[i].handle_command();
 			return (0);

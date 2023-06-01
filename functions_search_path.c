@@ -11,28 +11,43 @@ char *get_correct_path(char **path_tokens, char *command);
 char *search_path(char *command)
 {
 	char *path = NULL, **path_tokens = NULL, *correct_path = NULL;
+	size_t command_len = _strlen(command);
 
-	if (command[0] == '/' || command[0] == '.')
+	if (command[0] == '.' || command[0] == '/')
 	{
-		if (access(command, F_OK | X_OK) == 0)
+		correct_path = malloc(command_len + 1);
+		if (!correct_path)
 		{
-			return (command);
+			return (NULL);
 		}
+		null_fill(correct_path, command_len + 1);
+		correct_path = _strncpy(correct_path, command, command_len);
+		correct_path[command_len] = '\0';
+		if (access(correct_path, F_OK | X_OK) == 0)
+		{
+			return (correct_path);
+		}
+		_free(&correct_path);
 		return (NULL);
 	}
 
-	path = get_path(environ);
+	path = get_path();
+	path += 5;
 
-	path_tokens = split_path(path);
-
+	path_tokens = split(path, ":");
 	if (!path_tokens)
 	{
 		return (NULL);
 	}
 
 	correct_path = get_correct_path(path_tokens, command);
+	if (!correct_path)
+	{
+		_free_arr(&path_tokens);
+		return (NULL);
+	}
 
-	free_strarr(path_tokens);
+	_free_arr(&path_tokens);
 
 	return (correct_path);
 }
@@ -47,7 +62,7 @@ char *search_path(char *command)
  */
 char *get_correct_path(char **path_tokens, char *command)
 {
-	size_t i = 0, j = 0, k = 0;
+	size_t i = 0;
 	size_t command_len = _strlen(command), path_len = 0, total_len = 0;
 	char *correct_path = NULL;
 
@@ -60,24 +75,16 @@ char *get_correct_path(char **path_tokens, char *command)
 		{
 			return (NULL);
 		}
-		for (j = 0; j < path_len; j++)
-		{
-			correct_path[j] = path_tokens[i][j];
-		}
-		correct_path[j++] = '/';
-		for (; j < total_len; j++)
-		{
-			correct_path[j] = command[k++];
-		}
-		correct_path[j] = '\0';
+		null_fill(correct_path, total_len);
+		correct_path = _strncpy(correct_path, path_tokens[i], path_len);
+		correct_path = _strncat(correct_path, "/", 1);
+		correct_path = _strncat(correct_path, command, command_len);
 		if (access(correct_path, F_OK | X_OK) == 0)
 		{
 			return (correct_path);
 		}
+		_free(&correct_path);
 		i++;
-		k = 0;
-		free(correct_path);
-		correct_path = NULL;
 	}
-	return (correct_path);
+	return (NULL);
 }

@@ -1,12 +1,12 @@
 #include "main.h"
 /**
- * numtostr - Convert an integer to a string
+ * number_to_string - Convert an integer to a string
  * @num: The integer to convert
  *
  * Return: A pointer to the string, or NULL if memory allocation fails.
  *
  */
-char *numtostr(int num)
+char *number_to_string(int num)
 {
 	int i = 0, length = 0, temp = num;
 	char *str = NULL;

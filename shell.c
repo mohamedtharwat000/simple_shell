@@ -1,18 +1,17 @@
 #include "main.h"
 /**
  * shell - Run the shell
- * @argv: Array of command-line arguments
  *
  * Return: 0 on success, -1 on failure
  */
-ssize_t shell(char **argv)
+ssize_t shell(void)
 {
 	if (isatty(STDIN_FILENO))
 	{
-		return (shell_interactive(argv));
+		return (shell_interactive());
 	}
 	else
 	{
-		return (shell_noninteractive(argv));
+		return (shell_noninteractive());
 	}
 }

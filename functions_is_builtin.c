@@ -1,25 +1,24 @@
 #include "main.h"
 /**
  * is_builtin - Check if a command is a built-in command
- * @user_input: The user input command to check
+ * @command: The user input command to check
  *
  * Return: 0 if the command is a built-in command, -1 otherwise
  */
-ssize_t is_builtin(char *user_input)
+ssize_t is_builtin(char *command)
 {
-	ssize_t i = 0;
+	ssize_t builtin = 0;
 	char *builtins[] = {
 		"exit",
 		"env",
 		NULL
 	};
 
-	for (i = 0; builtins[i]; i++)
+	for (builtin = 0; builtins[builtin]; builtin++)
 	{
-		if (_strncmp(user_input, builtins[i],
-								 _strlen(user_input)) == 0)
+		if (_strncmp(command, builtins[builtin], _strlen(command)) == 0)
 		{
-			return (i);
+			return (builtin);
 		}
 	}
 

@@ -1,14 +1,14 @@
 #include "main.h"
 /**
  * get_path - Retrieve the value of the PATH environment variable
- * @envp: The array of environment variables
  *
  * Return: A pointer to the value of the PATH variable,
  * or NULL if not found.
  */
-char *get_path(char **envp)
+char *get_path(void)
 {
 	int i = 0;
+	char **envp = environ;
 
 	while (envp[i])
 	{

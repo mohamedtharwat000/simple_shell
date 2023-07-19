@@ -42,7 +42,7 @@ ssize_t builtin_handler(ssize_t builtin)
  */
 ssize_t handle_exit(void)
 {
-	exit(1);
+	exit(0);
 	return (0);
 }
 

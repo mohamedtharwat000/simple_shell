@@ -60,6 +60,12 @@ This project implements a simple UNIX command interpreter shell in C programming
 **search_path**
 - Finds full path for command from PATH
 
+## String Functions
+**`_strlen`** - Get length of string
+**`split`** - Split string into tokens
+**`_strncpy`** - Copy substring  
+**`_strncat`** - Concatenate substring
+
 
 ## Getting Started  <!-- Instructions for setting up and running the project -->
 

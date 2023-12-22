@@ -98,10 +98,30 @@ Run the shell with a script:
 Provide a script with commands to execute non-interactively.
 ```
 
-## Contributing  <!-- Guidelines for contributing to the project -->
+## Contributing
 
-If you'd like to contribute to this project, please send to me.
+Contributions are welcome! Here are some ways you can contribute to this project:
 
-## License  <!-- Information about the project's licensing -->
+- Report bugs and issues
+- Fix bugs and issues
+- Add new validation functionality
+- Improve styling and overall UX
+- Refactor code to improve quality
+- Write documentation and improve existing docs
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+To contribute:
+1. Fork the repository
+2. Create a new branch
+3. Make your changes and commit them
+4. Push your branch and submit a pull request
+
+I will review pull requests and provide feedback.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## Credits
+
+created by Mohamed Tharwat
+

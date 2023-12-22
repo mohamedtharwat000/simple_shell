@@ -1,16 +1,65 @@
-# simple_shell
+# Simple Shell Project
+This project implements a simple UNIX command interpreter shell in C programming language, capable of running commands in both interactive and non-interactive modes. It provides a basic understanding of how shells work and serves as a starting point for further exploration and customization.
 
-A simple shell implementation in C.
 
-## Introduction  <!-- Brief introduction to the project -->
+## Main Features
+- Runs in both interactive (REPL) and non-interactive modes
+- Implements built-in `exit` and `env` commands
+- Splits input into tokens using a delimiter
+- Forks processes to execute commands from `$PATH`
+- Searches across list of paths to locate commands
+- Outputs error if command not found
+- Counts number of commands executed
 
-This project is a simple shell implementation in C, capable of running commands in both interactive and non-interactive modes. It provides a basic understanding of how shells work and serves as a starting point for further exploration and customization.
 
-## Features  <!-- List of key features in the project -->
+## Code Files
+- functions_builtins.c
+- functions_count_tokens.c  
+- functions_execute_fork.c
+- functions_free.c
+- functions_get_path.c
+- functions_getc.c
+- functions_getline.c 
+- functions_handle_execution.c
+- functions_ignore_spaces.c
+- functions_is_builtin.c
+- functions_number_to_string.c
+- functions_putc.c
+- functions_search_path.c 
+- functions_split.c
+- functions_string_strlen.c
+- main.c
+- main.h
+- shell.c
+- shell_interactive.c
+- shell_noninteractive.c
 
-- Interactive and non-interactive modes
-- Basic command execution
-- Support for built-in commands
+
+## Function Definitions
+### Main Shell Functions
+**shell**
+- Decides whether to run in interactive or non-interactive mode
+
+**shell_interactive** 
+- Implements REPL loop prompting for user input  
+
+**shell_noninteractive**
+- Reads input from stdin and executes
+
+### Execute Command Functions
+**handle_execution**
+- Parses input and executes commands  
+
+**execute_fork**
+- Spawns process and runs command using execve
+
+### Path Functions
+**get_path**
+- Gets PATH environment variable 
+
+**search_path**
+- Finds full path for command from PATH
+
 
 ## Getting Started  <!-- Instructions for setting up and running the project -->
 
@@ -48,17 +97,6 @@ Run the shell with a script:
 ./your_shell < script.txt
 Provide a script with commands to execute non-interactively.
 ```
-
-## File Structure  <!-- Overview of the project's file organization -->
-
-- `AUTHORS`: List of contributors to the project.
-- `README.md`: This file you're reading right now.
-- `functions_*.c`: Source files containing various shell functions.
-- `main.c`: Main entry point of the program.
-- `main.h`: Header file with function prototypes and definitions.
-- `shell.c`: Contains the main shell function to determine interactive/non-interactive mode.
-- `shell_interactive.c` and `shell_noninteractive.c`: Implementations for each mode.
-- Other source files: Additional functions and utilities.
 
 ## Contributing  <!-- Guidelines for contributing to the project -->
 

@@ -30,25 +30,6 @@ This project implements a simple UNIX command interpreter shell in C programming
 **execute_fork**
 - Spawns process and runs command using execve
 
-### Path Functions
-**get_path**
-- Gets PATH environment variable 
-
-**search_path**
-- Finds full path for command from PATH
-
-## String Functions
-**_strlen** 
-- Get length of string
-
-**split** 
-- Split string into tokens
-
-**_strncpy** 
-- Copy substring  
-
-**_strncat** 
-- Concatenate substring
 
 ## Future Enhancements
 

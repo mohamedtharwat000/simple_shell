@@ -165,5 +165,5 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## Credits
 
-created by Mohamed Tharwat
+created by [Mohamed Tharwat](https://github.com/mohamedtharwat000)
 

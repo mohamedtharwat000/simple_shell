@@ -12,29 +12,6 @@ This project implements a simple UNIX command interpreter shell in C programming
 - Counts number of commands executed
 
 
-## Code Files
-- functions_builtins.c
-- functions_count_tokens.c  
-- functions_execute_fork.c
-- functions_free.c
-- functions_get_path.c
-- functions_getc.c
-- functions_getline.c 
-- functions_handle_execution.c
-- functions_ignore_spaces.c
-- functions_is_builtin.c
-- functions_number_to_string.c
-- functions_putc.c
-- functions_search_path.c 
-- functions_split.c
-- functions_string_strlen.c
-- main.c
-- main.h
-- shell.c
-- shell_interactive.c
-- shell_noninteractive.c
-
-
 ## Function Definitions
 ### Main Shell Functions
 **shell**

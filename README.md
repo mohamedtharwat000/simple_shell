@@ -61,17 +61,46 @@ This project implements a simple UNIX command interpreter shell in C programming
 - Finds full path for command from PATH
 
 ## String Functions
-**`_strlen`** 
+**_strlen** 
 - Get length of string
 
-**`split`** 
+**split** 
 - Split string into tokens
 
-**`_strncpy`** 
+**_strncpy** 
 - Copy substring  
 
-**`_strncat`** 
+**_strncat** 
 - Concatenate substring
+
+## Future Enhancements
+
+**Input/Output**
+
+- Implement output redirection (> and >>)
+- Implement input redirection (< and <<) 
+- Implement pipes (|) to connect commands
+
+**Additional Builtins** 
+
+- Add more built-in commands like echo, help etc.
+
+**User Customization**
+
+- Set up initialization script to run on shell start
+- Add command history and search
+- Support tab autocompletion 
+
+**Error Handling**
+
+- Improve control-C signal handling
+- Enhance error messages and logging
+
+**Batch/Scripting** 
+
+- Support running script files with multiple commands
+- Handle line continuation with backslash
+- Add conditional logic and loops
 
 
 ## Getting Started  <!-- Instructions for setting up and running the project -->
